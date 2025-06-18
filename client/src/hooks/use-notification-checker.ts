@@ -3,6 +3,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
 
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 export function useNotificationChecker() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -35,7 +37,7 @@ export function useNotificationChecker() {
       const savingsPercent = Math.round((savings / oldPriceNum) * 100);
 
       // Send email via server API
-      const emailResponse = await fetch('/api/notifications/send', {
+      const emailResponse = await fetch(`${API_BASE}/api/notifications/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

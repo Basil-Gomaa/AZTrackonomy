@@ -11,11 +11,13 @@ export interface EmailNotificationData {
   subject: string;
 }
 
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 export class ClientEmailService {
   async sendPriceDropAlert(data: EmailNotificationData): Promise<boolean> {
     try {
       // Use the server-side API endpoint to send emails via SendGrid
-      const response = await fetch('/api/notifications/send', {
+      const response = await fetch(`${API_BASE}/api/notifications/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -35,7 +37,6 @@ export class ClientEmailService {
       });
 
       if (response.ok) {
-
         return true;
       } else {
         console.error('Server email API error:', response.status, response.statusText);

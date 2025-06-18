@@ -13,6 +13,8 @@ import { NotificationSettings } from "@/components/notification-settings";
 
 import { ChartLine, Settings, RefreshCw } from "lucide-react";
 
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 export default function Dashboard() {
   const { settings } = useNotificationSettings();
   const userEmail = settings.email; // Use dynamic email from notification settings
@@ -89,7 +91,7 @@ export default function Dashboard() {
 
 
 
-      const response = await fetch('/api/notifications/send', {
+      const response = await fetch(`${API_BASE}/api/notifications/send`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
