@@ -191,9 +191,18 @@ export function ProductList({ userEmail }: { userEmail: string }) {
                         <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:space-x-4 mb-3">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
                             <span className="text-xs sm:text-sm text-muted-foreground">Current:</span>
-                            <span className="text-base sm:text-lg font-semibold text-foreground">
-                              ${parseFloat(product.currentPrice).toFixed(2)}
-                            </span>
+                            <div className={`inline-flex items-center px-2 py-1 rounded-md ${
+                              parseFloat(product.currentPrice) <= parseFloat(product.targetPrice)
+                                ? 'bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200'
+                                : 'bg-orange-100 dark:bg-orange-900/20 text-orange-800 dark:text-orange-200'
+                            }`}>
+                              <span className="text-base sm:text-lg font-semibold">
+                                ${parseFloat(product.currentPrice).toFixed(2)}
+                              </span>
+                              {parseFloat(product.currentPrice) <= parseFloat(product.targetPrice) && (
+                                <span className="ml-1 text-xs">✓</span>
+                              )}
+                            </div>
                           </div>
                           <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-2">
                             <span className="text-xs sm:text-sm text-muted-foreground">Target:</span>
