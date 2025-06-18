@@ -13,10 +13,13 @@ export interface AmazonProduct {
 export class AmazonApiService {
   private apiKey: string;
   private baseUrl: string;
+  private rapidApiHost: string;
 
   constructor() {
-    this.apiKey = process.env.RAPIDAPI_KEY || '';
-    this.baseUrl = "https://real-time-amazon-data.p.rapidapi.com";
+    // Hardcoded RapidAPI key and host from user
+    this.apiKey = '4ea96351efmshb53eaf4b64475dfp16bac8jsnbd5cb8ca8421';
+    this.baseUrl = "https://realtime-amazon-data.p.rapidapi.com";
+    this.rapidApiHost = 'realtime-amazon-data.p.rapidapi.com';
   }
 
   async getProductByAsin(asin: string): Promise<AmazonProduct | null> {
@@ -59,7 +62,7 @@ export class AmazonApiService {
         method: 'GET',
         headers: {
           'X-RapidAPI-Key': this.apiKey,
-          'X-RapidAPI-Host': 'real-time-amazon-data.p.rapidapi.com',
+          'X-RapidAPI-Host': this.rapidApiHost,
           'Accept': 'application/json'
         }
       });
@@ -81,7 +84,7 @@ export class AmazonApiService {
         method: 'GET',
         headers: {
           'X-RapidAPI-Key': this.apiKey,
-          'X-RapidAPI-Host': 'real-time-amazon-data.p.rapidapi.com',
+          'X-RapidAPI-Host': this.rapidApiHost,
           'Accept': 'application/json'
         }
       });
